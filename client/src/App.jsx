@@ -22,7 +22,7 @@ function App() {
       <ToastContainer position="top-right" autoClose={3000} />
       <div className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 text-white">
         <Navbar />
-        <div className="container mx-auto px-4 py-8 bg-slate-300 h-[100vh]">
+        <div className="container bg-container mx-auto px-4 py-8 bg-slate-300 h-[100vh] ">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route

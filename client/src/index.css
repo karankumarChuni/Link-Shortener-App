@@ -3,3 +3,9 @@
 @tailwind utilities;
 
 
+.home-container{
+    padding-bottom:5rem !important;
+}
+.bg-container{
+    height: 100%;
+}

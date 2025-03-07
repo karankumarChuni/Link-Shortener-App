@@ -56,7 +56,7 @@ function Home() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto">
+    <div className="max-w-4xl mx-auto home-container">
       <div className="bg-gray-800 p-8 rounded-xl shadow-2xl mb-8">
         <h1 className="text-3xl font-bold mb-6 text-center">
           Shorten Your URL
@@ -97,9 +97,11 @@ function Home() {
               >
                 <div className="flex justify-between items-center">
                   <div className="flex-1">
-                    <p className="text-lg font-medium truncate">
-                      {urlData.originalUrl}
-                    </p>
+                    <div className="break-words">
+                      <p className="text-lg font-medium">
+                        {urlData.originalUrl}
+                      </p>
+                    </div>
                     <div className="flex items-center space-x-2 mt-2">
                       {/* Clickable link that updates stats */}
                       <a
