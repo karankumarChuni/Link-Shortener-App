@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setCredentials } from "../store/authSlice";
 import { login } from "../api/api";
@@ -76,9 +76,9 @@ function Login() {
         {/* Redirect to Register Text */}
         <p className="mt-4 text-gray-400 text-center">
           Don't have an account?{" "}
-          <a href="/register" className="text-blue-500 hover:underline">
+          <Link to="/register" className="text-blue-500 hover:underline">
             Register here
-          </a>
+          </Link>
         </p>
       </div>
     </div>
