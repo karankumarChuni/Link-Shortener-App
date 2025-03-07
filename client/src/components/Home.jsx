@@ -106,19 +106,19 @@ function Home() {
                     </p>
                     <div className="flex flex-wrap items-center space-x-3 mt-2">
                       <a
-                        href={`http://localhost:5000/api/urls/${urlData.shortUrl}`} // Keep this unchanged for correct redirection
+                        href={`https://link-shortener-app-1.onrender.com/api/urls/${urlData.shortUrl}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-blue-400 hover:underline break-all"
                         onClick={handleLinkClick}
                       >
                         {`Triveous-Tech/${urlData.shortUrl}`}{" "}
-                        {/* Change only the displayed text */}
+                        {/* Display as Triveous-Tech */}
                       </a>
                       <button
                         onClick={() =>
                           copyToClipboard(
-                            `http://localhost:5000/api/urls/${urlData.shortUrl}`
+                            `https://link-shortener-app-1.onrender.com/api/urls/${urlData.shortUrl}`
                           )
                         }
                         className="text-gray-400 hover:text-white"
