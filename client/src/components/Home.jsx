@@ -46,9 +46,8 @@ function Home() {
     }
   };
 
-  // Function to update stats only when a link is clicked
   const handleLinkClick = () => {
-    setTimeout(fetchUrls, 2000); // Wait 2 seconds to let backend register the click
+    setTimeout(fetchUrls, 2000);
   };
 
   const copyToClipboard = (text) => {
@@ -56,24 +55,25 @@ function Home() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto home-container">
-      <div className="bg-gray-800 p-8 rounded-xl shadow-2xl mb-8">
-        <h1 className="text-3xl font-bold mb-6 text-center">
+    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* URL Shortener Box */}
+      <div className="bg-gray-800 p-6 md:p-8 rounded-xl shadow-2xl mb-8">
+        <h1 className="text-2xl sm:text-3xl font-bold mb-4 text-center">
           Shorten Your URL
         </h1>
         <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="flex gap-4">
+          <div className="flex flex-col sm:flex-row gap-3">
             <input
               type="url"
               value={url}
               onChange={(e) => setUrl(e.target.value)}
-              placeholder="Enter your long URL here..."
-              className="flex-1 px-4 py-2 rounded-lg bg-gray-700 border border-gray-600 focus:outline-none focus:border-blue-500"
+              placeholder="Enter your long URL..."
+              className="flex-1 px-4 py-3 rounded-lg bg-gray-700 border border-gray-600 focus:outline-none focus:border-blue-500 w-full"
               required
             />
             <button
               type="submit"
-              className="bg-blue-500 hover:bg-blue-600 px-6 py-2 rounded-lg transition-colors"
+              className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg transition-colors w-full sm:w-auto"
               disabled={loading}
             >
               {loading ? "Shortening..." : "Shorten"}
@@ -82,12 +82,16 @@ function Home() {
         </form>
       </div>
 
+      {/* Error Message */}
       {error && (
-        <div className="bg-red-500 text-white p-4 rounded-lg mb-8">{error}</div>
+        <div className="bg-red-500 text-white p-4 rounded-lg mb-6 text-center">
+          {error}
+        </div>
       )}
 
+      {/* Display URLs */}
       {isAuthenticated && urls.length > 0 && (
-        <div className="bg-gray-800 p-8 rounded-xl shadow-2xl">
+        <div className="bg-gray-800 p-6 md:p-8 rounded-xl shadow-2xl">
           <h2 className="text-2xl font-bold mb-6">Your Shortened URLs</h2>
           <div className="space-y-4">
             {urls.map((urlData) => (
@@ -95,20 +99,17 @@ function Home() {
                 key={urlData.shortUrl}
                 className="bg-gray-700 rounded-lg p-4"
               >
-                <div className="flex justify-between items-center">
+                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center">
                   <div className="flex-1">
-                    <div className="break-words">
-                      <p className="text-lg font-medium">
-                        {urlData.originalUrl}
-                      </p>
-                    </div>
-                    <div className="flex items-center space-x-2 mt-2">
-                      {/* Clickable link that updates stats */}
+                    <p className="text-lg font-medium break-words">
+                      {urlData.originalUrl}
+                    </p>
+                    <div className="flex flex-wrap items-center space-x-3 mt-2">
                       <a
                         href={`http://localhost:5000/api/urls/${urlData.shortUrl}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-blue-400 hover:underline"
+                        className="text-blue-400 hover:underline break-all"
                         onClick={handleLinkClick}
                       >
                         {`http://localhost:5000/api/urls/${urlData.shortUrl}`}
@@ -133,6 +134,7 @@ function Home() {
                       </a>
                     </div>
                   </div>
+
                   <button
                     onClick={() =>
                       setExpandedUrl(
@@ -141,7 +143,7 @@ function Home() {
                           : urlData.shortUrl
                       )
                     }
-                    className="ml-4"
+                    className="mt-4 sm:mt-0"
                   >
                     {expandedUrl === urlData.shortUrl ? (
                       <ChevronUp size={24} />
@@ -151,31 +153,28 @@ function Home() {
                   </button>
                 </div>
 
+                {/* Stats Section */}
                 {expandedUrl === urlData.shortUrl && (
-                  <div className="grid grid-cols-4 gap-4 mt-4 pt-4 border-t border-gray-600">
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-4 pt-4 border-t border-gray-600">
                     <div className="text-center">
-                      <p className="text-gray-400">Today</p>
-                      <p className="text-2xl font-bold">
-                        {urlData.todayClicks}
-                      </p>
+                      <p className="text-gray-400 text-sm">Today</p>
+                      <p className="text-xl font-bold">{urlData.todayClicks}</p>
                     </div>
                     <div className="text-center">
-                      <p className="text-gray-400">This Week</p>
-                      <p className="text-2xl font-bold">
+                      <p className="text-gray-400 text-sm">This Week</p>
+                      <p className="text-xl font-bold">
                         {urlData.weeklyClicks}
                       </p>
                     </div>
                     <div className="text-center">
-                      <p className="text-gray-400">This Month</p>
-                      <p className="text-2xl font-bold">
+                      <p className="text-gray-400 text-sm">This Month</p>
+                      <p className="text-xl font-bold">
                         {urlData.monthlyClicks}
                       </p>
                     </div>
                     <div className="text-center">
-                      <p className="text-gray-400">Total Clicks</p>
-                      <p className="text-2xl font-bold">
-                        {urlData.totalClicks}
-                      </p>
+                      <p className="text-gray-400 text-sm">Total Clicks</p>
+                      <p className="text-xl font-bold">{urlData.totalClicks}</p>
                     </div>
                   </div>
                 )}

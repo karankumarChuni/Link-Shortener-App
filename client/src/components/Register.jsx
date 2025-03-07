@@ -3,12 +3,13 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setCredentials } from "../store/authSlice";
 import { register } from "../api/api";
-import { UserPlus } from "lucide-react";
+import { UserPlus, Eye, EyeOff } from "lucide-react";
 import { toast } from "react-toastify";
 
 function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -18,11 +19,11 @@ function Register() {
     try {
       const response = await register({ email, password });
       dispatch(setCredentials(response.data.token));
-      navigate("/"); // Redirect to Home first
+      navigate("/");
 
       setTimeout(() => {
         toast.success("Registration successful!");
-      }, 500); // Show toast after redirection
+      }, 500);
     } catch (error) {
       setError(error.response?.data?.message || "Registration failed");
     }
@@ -54,15 +55,23 @@ function Register() {
             />
           </div>
 
-          <div>
+          {/* Password Field with Show/Hide Button */}
+          <div className="relative">
             <label className="block text-sm font-medium mb-2">Password</label>
             <input
-              type="password"
+              type={showPassword ? "text" : "password"}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-4 py-2 rounded-lg bg-gray-700 border border-gray-600 focus:outline-none focus:border-blue-500"
+              className="w-full px-4 py-2 rounded-lg bg-gray-700 border border-gray-600 focus:outline-none focus:border-blue-500 pr-10"
               required
             />
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute top-10 right-3 text-gray-400 hover:text-white"
+            >
+              {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+            </button>
           </div>
 
           <button
