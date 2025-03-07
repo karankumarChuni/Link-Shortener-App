@@ -30,11 +30,11 @@ function Login() {
 
   return (
     <div className="max-w-md mx-auto">
-      <div className="bg-gray-800 p-8 rounded-xl shadow-2xl">
-        <div className="flex items-center justify-center mb-8">
+      <div className="bg-gray-800 p-8 rounded-xl shadow-2xl mt-12">
+        <div className="flex items-center justify-center gap-3 mb-5">
           <LogIn className="h-12 w-12 text-blue-500" />
+          <h1 className="text-3xl font-bold">Login</h1>
         </div>
-        <h1 className="text-3xl font-bold mb-6 text-center">Login</h1>
 
         {error && (
           <div className="bg-red-500 text-white p-4 rounded-lg mb-6">
@@ -67,11 +67,19 @@ function Login() {
 
           <button
             type="submit"
-            className="w-full bg-blue-500 hover:bg-blue-600 py-2 rounded-lg transition-colors"
+            className="w-full bg-blue-500 hover:bg-blue-600 py-2 rounded-lg transition-colors login-btn"
           >
             Login
           </button>
         </form>
+
+        {/* Redirect to Register Text */}
+        <p className="mt-4 text-gray-400 text-center">
+          Don't have an account?{" "}
+          <a href="/register" className="text-blue-500 hover:underline">
+            Register here
+          </a>
+        </p>
       </div>
     </div>
   );

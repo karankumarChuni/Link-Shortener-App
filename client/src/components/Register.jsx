@@ -32,7 +32,7 @@ function Register() {
   return (
     <div className="max-w-md mx-auto">
       <div className="bg-gray-800 p-8 rounded-xl shadow-2xl mt-12">
-        <div className="flex items-center justify-center space-x-4 mb-8">
+        <div className="flex items-center justify-center space-x-4 mb-5">
           <UserPlus className="h-12 w-12 text-green-500" />
           <h1 className="text-3xl font-bold text-center">Register</h1>
         </div>
@@ -81,6 +81,14 @@ function Register() {
             Register
           </button>
         </form>
+
+        {/* Redirect to Login Text */}
+        <p className="mt-4 text-gray-400 text-center">
+          Already have an account?{" "}
+          <a href="/login" className="text-blue-500 hover:underline">
+            Login here
+          </a>
+        </p>
       </div>
     </div>
   );
