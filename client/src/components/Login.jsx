@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setCredentials } from "../store/authSlice";
 import { login } from "../api/api";
@@ -31,11 +31,11 @@ function Login() {
 
   return (
     <div className="max-w-md mx-auto">
-      <div className="bg-gray-800 p-8 rounded-xl shadow-2xl">
-        <div className="flex items-center justify-center mb-8">
+      <div className="bg-gray-800 p-8 rounded-xl shadow-2xl  mt-10">
+        <div className="flex items-center justify-center space-x-4 mb-8">
           <LogIn className="h-12 w-12 text-blue-500" />
+          <h1 className="text-3xl font-bold text-center">Login</h1>
         </div>
-        <h1 className="text-3xl font-bold mb-6 text-center">Login</h1>
 
         {error && (
           <div className="bg-red-500 text-white p-4 rounded-lg mb-6">
@@ -81,6 +81,16 @@ function Login() {
             Login
           </button>
         </form>
+
+        {/* Register Link */}
+        <div className="mt-6 text-center">
+          <p className="text-gray-400">
+            Don't have an account?{" "}
+            <Link to="/register" className="text-blue-500 hover:underline">
+              Register
+            </Link>
+          </p>
+        </div>
       </div>
     </div>
   );
