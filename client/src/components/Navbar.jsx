@@ -1,8 +1,8 @@
-import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { logout } from '../store/authSlice';
-import { Link2 } from 'lucide-react';
+import React from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "../store/authSlice";
+import { Link2 } from "lucide-react";
 
 function Navbar() {
   const { isAuthenticated } = useSelector((state) => state.auth);
@@ -11,18 +11,20 @@ function Navbar() {
 
   const handleLogout = () => {
     dispatch(logout());
-    navigate('/');
+    navigate("/");
   };
 
   return (
-    <nav className="bg-gray-800 shadow-lg">
+    <nav className="bg-slate-200 shadow-lg px-4">
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center h-16">
           <Link to="/" className="flex items-center space-x-2">
             <Link2 className="h-8 w-8 text-blue-500" />
-            <span className="text-xl font-bold">URL Shortener</span>
+            <span className="text-2xl font-bold text-blue-500">
+              Triveous Tech Assignment
+            </span>
           </Link>
-          
+
           <div className="flex items-center space-x-4">
             {isAuthenticated ? (
               <button
@@ -54,4 +56,4 @@ function Navbar() {
   );
 }
 
-export default Navbar
+export default Navbar;

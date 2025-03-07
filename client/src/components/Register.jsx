@@ -1,14 +1,15 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { setCredentials } from '../store/authSlice';
-import { register } from '../api/api';
-import { UserPlus } from 'lucide-react';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setCredentials } from "../store/authSlice";
+import { register } from "../api/api";
+import { UserPlus } from "lucide-react";
+import { toast } from "react-toastify";
 
 function Register() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -17,9 +18,13 @@ function Register() {
     try {
       const response = await register({ email, password });
       dispatch(setCredentials(response.data.token));
-      navigate('/');
+      navigate("/"); // Redirect to Home first
+
+      setTimeout(() => {
+        toast.success("Registration successful!");
+      }, 500); // Show toast after redirection
     } catch (error) {
-      setError(error.response?.data?.message || 'Registration failed');
+      setError(error.response?.data?.message || "Registration failed");
     }
   };
 
@@ -30,7 +35,7 @@ function Register() {
           <UserPlus className="h-12 w-12 text-green-500" />
         </div>
         <h1 className="text-3xl font-bold mb-6 text-center">Register</h1>
-        
+
         {error && (
           <div className="bg-red-500 text-white p-4 rounded-lg mb-6">
             {error}
@@ -48,7 +53,7 @@ function Register() {
               required
             />
           </div>
-          
+
           <div>
             <label className="block text-sm font-medium mb-2">Password</label>
             <input
@@ -72,4 +77,4 @@ function Register() {
   );
 }
 
-export default Register
+export default Register;

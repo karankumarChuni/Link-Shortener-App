@@ -1,14 +1,15 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { setCredentials } from '../store/authSlice';
-import { login } from '../api/api';
-import { LogIn } from 'lucide-react';
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setCredentials } from "../store/authSlice";
+import { login } from "../api/api";
+import { LogIn } from "lucide-react";
+import { toast } from "react-toastify";
 
 function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -17,9 +18,13 @@ function Login() {
     try {
       const response = await login({ email, password });
       dispatch(setCredentials(response.data.token));
-      navigate('/');
+      navigate("/"); // Redirect to Home first
+
+      setTimeout(() => {
+        toast.success("Login successful!");
+      }, 500); // Show toast after redirection
     } catch (error) {
-      setError(error.response?.data?.message || 'Login failed');
+      setError(error.response?.data?.message || "Login failed");
     }
   };
 
@@ -30,7 +35,7 @@ function Login() {
           <LogIn className="h-12 w-12 text-blue-500" />
         </div>
         <h1 className="text-3xl font-bold mb-6 text-center">Login</h1>
-        
+
         {error && (
           <div className="bg-red-500 text-white p-4 rounded-lg mb-6">
             {error}
@@ -48,7 +53,7 @@ function Login() {
               required
             />
           </div>
-          
+
           <div>
             <label className="block text-sm font-medium mb-2">Password</label>
             <input
@@ -72,4 +77,4 @@ function Login() {
   );
 }
 
-export default Login
+export default Login;
