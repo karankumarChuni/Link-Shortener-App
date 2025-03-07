@@ -55,7 +55,7 @@ function Home() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 home-container">
       {/* URL Shortener Box */}
       <div className="bg-gray-800 p-6 md:p-8 rounded-xl shadow-2xl mb-8">
         <h1 className="text-2xl sm:text-3xl font-bold mb-4 text-center">
@@ -106,13 +106,14 @@ function Home() {
                     </p>
                     <div className="flex flex-wrap items-center space-x-3 mt-2">
                       <a
-                        href={`http://localhost:5000/api/urls/${urlData.shortUrl}`}
+                        href={`http://localhost:5000/api/urls/${urlData.shortUrl}`} // Keep this unchanged for correct redirection
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-blue-400 hover:underline break-all"
                         onClick={handleLinkClick}
                       >
-                        {`http://localhost:5000/api/urls/${urlData.shortUrl}`}
+                        {`Triveous-Tech/${urlData.shortUrl}`}{" "}
+                        {/* Change only the displayed text */}
                       </a>
                       <button
                         onClick={() =>
