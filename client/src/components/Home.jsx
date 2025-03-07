@@ -46,6 +46,11 @@ function Home() {
     }
   };
 
+  // Function to update stats only when a link is clicked
+  const handleLinkClick = () => {
+    setTimeout(fetchUrls, 2000); // Wait 2 seconds to let backend register the click
+  };
+
   const copyToClipboard = (text) => {
     navigator.clipboard.writeText(text);
   };
@@ -96,9 +101,16 @@ function Home() {
                       {urlData.originalUrl}
                     </p>
                     <div className="flex items-center space-x-2 mt-2">
-                      <p className="text-blue-400">
+                      {/* Clickable link that updates stats */}
+                      <a
+                        href={`http://localhost:5000/api/urls/${urlData.shortUrl}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-400 hover:underline"
+                        onClick={handleLinkClick}
+                      >
                         {`http://localhost:5000/api/urls/${urlData.shortUrl}`}
-                      </p>
+                      </a>
                       <button
                         onClick={() =>
                           copyToClipboard(
