@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setCredentials } from "../store/authSlice";
 import { register } from "../api/api";
-import { UserPlus, Eye, EyeOff } from "lucide-react";
+import { UserPlus, Eye, EyeOff, Info } from "lucide-react";
 import { toast } from "react-toastify";
 
 function Register() {
@@ -32,6 +32,15 @@ function Register() {
   return (
     <div className="max-w-md mx-auto">
       <div className="bg-gray-800 p-8 rounded-xl shadow-2xl mt-12">
+        {/* Server Start Info Message */}
+        <div className="bg-yellow-500 text-black p-3 rounded-lg mb-4 flex items-center">
+          <Info className="h-5 w-5 mr-2" />
+          <span>
+            The server is hosted on Render and may take up to a minute to start.
+            Please wait for the response.
+          </span>
+        </div>
+
         <div className="flex items-center justify-center space-x-4 mb-5">
           <UserPlus className="h-12 w-12 text-green-500" />
           <h1 className="text-3xl font-bold text-center">Register</h1>
@@ -76,7 +85,7 @@ function Register() {
 
           <button
             type="submit"
-            className="w-full bg-green-500 hover:bg-green-600 py-2 rounded-lg transition-colors"
+            className="w-full bg-green-500 hover:bg-green-600 py-2 rounded-lg transition-colors login-btn"
           >
             Register
           </button>
